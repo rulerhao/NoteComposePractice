@@ -5,9 +5,7 @@ import androidx.room.Room
 import com.rulhouse.notecomposepractice.feature_node.data.data_source.NoteDataBase
 import com.rulhouse.notecomposepractice.feature_node.data.repository.NoteRepositoryImpl
 import com.rulhouse.notecomposepractice.feature_node.domain.repository.NoteRepository
-import com.rulhouse.notecomposepractice.feature_node.domain.use_case.DeleteNote
-import com.rulhouse.notecomposepractice.feature_node.domain.use_case.GetNotes
-import com.rulhouse.notecomposepractice.feature_node.domain.use_case.NoteUseCases
+import com.rulhouse.notecomposepractice.feature_node.domain.use_case.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,7 +27,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNoteRespository(db: NoteDataBase): NoteRepository {
+    fun provideNoteRepository(db: NoteDataBase): NoteRepository {
         return NoteRepositoryImpl(db.noteDao)
     }
 
@@ -38,7 +36,9 @@ object AppModule {
     fun provideNoteUseCases(repository: NoteRepository): NoteUseCases {
         return NoteUseCases(
             getNotes = GetNotes(repository),
-            deleteNote = DeleteNote(repository)
+            deleteNote = DeleteNote(repository),
+            addNote = AddNote(repository),
+            getNote = GetNote(repository)
         )
     }
 }
