@@ -47,7 +47,8 @@ fun AddEditNoteScreen(
     val scope = rememberCoroutineScope()
 
     LaunchedEffect(
-        key1 = true) {
+        key1 = true
+    ) {
         viewModel.eventFlow.collectLatest { event ->
             when(event) {
                 is AddEditNoteViewModel.UiEvent.ShowSnackbar -> {

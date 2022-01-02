@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -31,7 +30,7 @@ fun NotesScreen(
     val state = viewModel.state.value
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
-    
+
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
@@ -50,26 +49,26 @@ fun NotesScreen(
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "Your note",
-                    style = MaterialTheme.typography.h4
-                )
-                IconButton(
-                    onClick = {
-                        viewModel.onEvent(NotesEvent.ToggleOrderSection)
-                    },
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Sort,
-                        contentDescription = "Sort"
+                    Text(
+                        text = "Your note",
+                        style = MaterialTheme.typography.h4
                     )
+                    IconButton(
+                        onClick = {
+                            viewModel.onEvent(NotesEvent.ToggleOrderSection)
+                        },
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Sort,
+                            contentDescription = "Sort"
+                        )
+                    }
                 }
-            }
             AnimatedVisibility(
                 visible = state.isOrderSectionVisible,
                 enter = fadeIn() + slideInVertically(),
